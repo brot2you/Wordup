@@ -1,0 +1,45 @@
+
+/* WORDUP ARCADE V4: non-destructive dark/neon skin for the original Word Up engine */
+:root{--ink:#ece9ff;--ink-soft:#b2b3d7;--bg:#100c27;--dot:#29204a;--card:#1e1743;--blue:#504bdf;--blue-d:#3732ac;--yellow:#ffd048;--pink:#ff53ae;--mint:#22cda6;--red:#fb5878;--bronze:#cb8252;--silver:#92bcdb;--gold:#eac64a;}
+body{background:#110b2c;background-image:radial-gradient(ellipse at 8% 4%,#392065 0%,transparent 42%),radial-gradient(ellipse at 90% 34%,#0c4383 0%,transparent 40%),radial-gradient(#322058 1px,transparent 1px);background-size:auto,auto,24px 24px;color:var(--ink)}
+.app{max-width:1150px;padding:22px 22px 120px}
+.retro-top{position:relative;z-index:9;background:#140d32eF;border-bottom:2px solid #6f4ac8;min-height:61px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px max(18px,calc((100vw - 1150px)/2));font-family:var(--display);font-weight:800}
+.retro-back{display:inline-flex;align-items:center;gap:8px;border-radius:12px;border:2px solid #47e4ff;color:#fff;text-decoration:none;padding:8px 12px;background:#313167}
+.retro-back:hover{background:#4443a8}.retro-brand{font-size:1.18rem;color:#ffda45;text-shadow:0 2px #3b174b}.retro-flag{font-family:var(--body);font-size:.7rem;letter-spacing:.04em;color:#b5eafb}
+.retro-banner{max-width:1150px;margin:19px auto 0;min-height:230px;padding:25px 32px;display:flex;flex-direction:column;justify-content:center;border:2px solid #7456d0;border-radius:24px;background:linear-gradient(90deg,rgba(10,7,33,.96),rgba(10,7,33,.40)),url('assets/hero.webp') center/cover;box-shadow:0 14px 42px #0008}
+.retro-banner>span{font-size:.86rem;font-weight:800;letter-spacing:.2em;color:#87f2ff}.retro-banner h1{font-size:clamp(2rem,5vw,3.8rem);line-height:1;max-width:700px;margin:8px 0 10px;color:#ffdc4c;text-shadow:0 4px #4b1b7c}.retro-banner h1 em{font-style:normal;color:#48e3ff}.retro-banner p{font-size:1.02rem;color:#efe5ff;margin:0}
+.stk,.game,.action,.isle,.post,.wc,.opt,.rung,.btn,.chip,.avatar,.pick,.stat,.item,.slot,.tile,.cw-c,.bs-c,.mc,.modal .box{border-color:#7768c2;box-shadow:0 4px 0 #0b092a}
+.stk{background:var(--card)}.btn,.opt,.pick,.wc,.rung,.slot,.bs-c,.cw-c,.modal .box{background:#282151;color:var(--ink)}
+.btn.blue,.action.primary{background:#5949df;color:white;border-color:#877bff}.btn.yellow,.tile{background:#ffd44f;color:#251538;border-color:#ffec9b}.btn.mint{background:#1fbaa0;color:#031e31}.btn.pink{background:#d44291;color:white}
+.tabbar{background:#170e32f0;border-top:2px solid #7668bf}.tab.on{background:#463679;border-color:#988bff}.tab{color:#fff}
+.hero.stk{background:linear-gradient(130deg,#5536a9,#193e82);border:2px solid #7765fa}.hero h1{color:#fff}
+.game.c1,.action:not(.primary),.game.c2,.game.c3,.game.c4,.game.c5,.game.c6{background:linear-gradient(155deg,#3e2d7a,#211a4b);color:#fff}.game.c2{background:linear-gradient(155deg,#184d76,#1b2457)}.game.c3{background:linear-gradient(155deg,#175d63,#1b2757)}.game.c4{background:linear-gradient(155deg,#6b4c1e,#2e245e)}.game.c5{background:linear-gradient(155deg,#602d71,#242052)}.game.c6{background:linear-gradient(155deg,#6a324e,#20204c)}
+.game small,.action small,.isle small,.post small,.note,.muted,.game .muted{color:#b9b9db}.game:focus-visible,.btn:focus-visible,.action:focus-visible{outline:3px solid #7fe4ff}
+.isle,.post{background:#292352;color:#fff}.post .cap{background:#201944}.post:hover,.game:hover{border-color:#79eaff;transform:translateY(-2px)}
+.cards{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}.wc{background:#292052}.wc.locked{background:repeating-linear-gradient(45deg,#241945 0 8px,#332354 8px 16px)}
+.t-bronze{background:linear-gradient(155deg,#5a342b,#3f2745)}.t-silver{background:linear-gradient(155deg,#405270,#253457)}.t-gold{background:linear-gradient(155deg,#725820,#4c3b33)}
+.pcard .back{background:linear-gradient(160deg,#713bb9,#2a2a88)}.pcard .front{background:#282155;color:#fff}.pcard .front.rare{background:linear-gradient(160deg,#6d367e,#a94479)}
+.mini,.pbar,.lvbar,.prog,.hp{background:#332851;border-color:#7164bb}
+.qcard,.ticket{background:var(--card);color:#fff}.tip{background:#46304f;border-color:#b191e1}.qcard mark{color:#18112f}
+.opt.good,.mc.done,.cw-c.ok{color:#051a26;background:#7ae0b1}.opt.bad{color:#341221;background:#ffa7b9}
+.mem .mc{background:#3c3ab1}.mem .mc.up{background:#2b215c}.mem .mc.done{background:#238469}
+.chip,.slow{background:#30265d;color:#fff}.chip.coin,.chip.fire{background:#4b3375;color:#ffdd73}
+.wcell{background:#241b50}.wcell.g{background:#17a68b}.wcell.y{background:#d9ac3d}.wcell.n{background:#695f84}
+.key{background:#35305c;color:#fff}.key.g,.key.y{color:#132033}
+input[type=text],select{color:#fff;background:#30275f;border-color:#7e72c7}
+.fb.ok{color:#102a23}.fb.ko{color:#481722}.fb.ok h3,.fb.ko h3{color:inherit}
+.v4-more{background:#251b52}
+.toast{background:#292257;color:#fff;border:1px solid #72e5ff;box-shadow:0 6px 22px #0009}
+body:not([data-view="home"]):not([data-view="arcade"]):not([data-view="onboarding"]) .retro-banner{display:none}
+.cw-c.sel,.cw-c.cur{color:#10102b}
+.game{position:relative;isolation:isolate;overflow:hidden;min-height:153px;justify-content:center;padding:18px}
+.game .ic{font-size:43px;margin-bottom:6px;filter:drop-shadow(0 0 8px #ffce4355)}
+.game b{font-size:1.28rem}
+.game small{font-size:.87rem;line-height:1.35}
+.game::after{content:'';position:absolute;inset:-100% -70%;background:linear-gradient(112deg,transparent 44%,#ffffff17 50%,transparent 56%);transform:translateX(-100%) rotate(5deg);pointer-events:none;z-index:0}
+.game:hover::after{transform:translateX(100%) rotate(5deg);transition:transform .8s}
+.retro-banner h1{font-size:clamp(2rem,4vw,3.25rem);max-width:830px}
+
+@media(min-width:800px){.games{grid-template-columns:repeat(4,minmax(0,1fr))}.games .wide{grid-column:span 2}.map{grid-template-columns:repeat(3,minmax(0,1fr))}.actions{grid-template-columns:repeat(3,minmax(0,1fr))}.actions .primary{grid-column:span 3}.mem{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:700px){.retro-banner{margin:12px 10px 0;padding:17px;min-height:170px}.retro-banner p{font-size:.83rem}.retro-top{padding:9px 10px}.retro-flag{display:none}.retro-brand{font-size:.85rem}.app{padding:14px 12px 115px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}}

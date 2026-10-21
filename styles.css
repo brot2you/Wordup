@@ -67,3 +67,17 @@
 @media(max-width:740px){.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.memory-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.memory-card{min-height:103px}.booster-word-card{min-height:207px}.booster-card-grid{gap:7px}.booster-word-card .boost-mystery{font-size:60px}}
 @media(max-width:490px){.cw-cell,.cw-blank{width:29px;height:29px}.cw-input{font-size:18px;padding-top:7px}.booster-card-grid{grid-template-columns:1fr;max-width:290px}.booster-word-card{min-height:170px}.album-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.memory-card{min-height:90px}.memory-grid{gap:7px}}
 @media(prefers-reduced-motion:reduce){.booster-box{animation:none}}
+
+/* V4 original arcade portal */
+.classic-portal-hero{position:relative;overflow:hidden;min-height:310px;border:2px solid #ac77ff;border-radius:24px;background:linear-gradient(90deg,rgba(16,6,39,.94),rgba(20,7,56,.62)),url('assets/hero.webp') center/cover;padding:38px;display:flex;align-items:center;box-shadow:0 18px 48px #0007}
+.classic-portal-hero>div{max-width:700px;position:relative;z-index:1}
+.classic-portal-hero h1{font-size:clamp(2.4rem,6vw,4.5rem);color:#ffdc45;line-height:1;margin:12px 0;text-shadow:0 4px 0 #4c1174}
+.classic-portal-hero h1 em{color:#49d9ff;font-style:normal}
+.classic-portal-hero p{color:#e7e0ff;max-width:600px;font-size:1.12rem}
+.classic-portal-hero a,.classic-portal-hero a:hover{display:inline-block;margin-top:14px;color:#180b32;text-decoration:none}
+.classic-games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.mode-classic{--card-color:#f9d54c;background:linear-gradient(170deg,#3a254d,#161339)}.mode-classic .play-tag{background:linear-gradient(90deg,#ffdc62,#ffaf2e)}
+.classic-game-tile{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#fff!important;border:2px solid #6c6bdb;border-radius:18px;background:linear-gradient(150deg,#29245f,#101232);min-height:188px;padding:16px;box-shadow:0 7px 0 #100a30;transition:transform .15s,border .15s}
+.classic-game-tile:hover,.classic-game-tile:focus-visible{transform:translateY(-4px);border-color:#ffda44}
+.classic-game-tile>span{font-size:43px}.classic-game-tile strong{font-size:1.24rem}.classic-game-tile small{font-size:.9rem;color:#bcd0ff;flex:1}.classic-game-tile b{color:#ffdc44;font-size:.9rem}
+@media(max-width:600px){.classic-portal-hero{padding:22px;min-height:275px}.classic-games-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.classic-game-tile{min-height:168px;padding:11px}.classic-game-tile small{font-size:.76rem}.classic-game-tile strong{font-size:1rem}}
