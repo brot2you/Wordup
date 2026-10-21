@@ -1,54 +1,46 @@
-# 🎮 WORDUP ARCADE — V2 · Curriculum Vocabulary Edition
+# 🎮 WORDUP ARCADE V3 — Crossword & Booster Edition
 
-A standalone web app for learning English in French collège (6e, 5e, 4e, 3e). Built in HTML, CSS and JavaScript. Works on desktop, tablet and phone and can be hosted via GitHub Pages.
+Standalone HTML/CSS/JavaScript learning game for English in French collège (6e–3e).
 
-## What's new in V2
+## Vocabulary update: 1,504 entries
 
-- **808 new contextualised vocabulary entries**, hand-curated and categorised into **27 curriculum decks**:
-  - **6e**: 209 entries (6 decks, including a Rainbow Serpent special)
-  - **5e**: 196 entries (7 decks, including Irish landscapes and cinema)
-  - **4e**: 202 entries (7 decks, including hurling and Irish culture)
-  - **3e**: 201 entries (7 decks, including art as a form of engagement)
-- **96 original words** retained from V1 in **8 BONUS decks**.
-- Total **904 deck entries**, representing **732 distinct English words or phrases** (repetitions across levels are deliberate for revision).
-- **Filters by year**: 6e / 5e / 4e / 3e / BONUS / ALL.
-- **Vocabulary search**, in English or French, inside the deck selector and the new **Word Library**.
-- **Word Library**: English term, French meaning, short contextualised example, British-English audio, 'I know this' progression marker.
-- More contextual feedback after every Arcade Quest or Challenge question.
-- All existing V1 game types remain: Quests, Challenge, Practice (flashcards/listening/spelling/matching), Story, 2-Player Battle, rewards and teacher studio.
-- Original local-storage key preserved (`brot2you-wordup-arcade-v1`) to keep pupils' progress from V1 **if the same website origin and browser are used**.
+- **V2 vocabulary is preserved**: 808 contextualised curriculum-inspired entries in 27 packs plus 96 V1 bonus entries in 8 packs.
+- **600 NEW V3 entries** in 24 new thematic packs: **150 extra entries per class level** (6e, 5e, 4e, 3e).
+- **1,504 deck entries in 59 packs** = **1,206 different English words/expressions**. Grade overlap is intentional to support repeated practice.
+- Each entry contains an English term, French translation and short original contextual example.
+- Searchable **Word Library**, grade filters, and British-English text-to-speech when the browser supports it.
+- The comprehensive printable, editable text catalogue is **`WORDUP-COMPLETE-VOCABULARY-V3.txt`**.
+- The extra data is in `vocab-extra.js`; do not leave it out when deploying.
 
-## Pedagogical grounding and limitations
+## Nine playable game modes
 
-The content is based on the **2025 programme d'anglais pour les classes de collège**, particularly its cultural axes and *Lexique en lien avec les axes culturels* sections. Extra focused packs follow the scenarios in the **2026 livret d'accompagnement**: The Rainbow Serpent (6e), The Emerald Isle / Wild Atlantic Way (5e), Irish hurling (4e), and music and social engagement (3e). Grade-specific CEFR level ranges respect the LVA/LVB expectations.
+1. **Arcade Quests** — 8-question missions across the vocabulary worlds.
+2. **Crossword Lab (NEW)** — generated English crossword with French clues, intersecting words, check and reveal-a-letter help. Choose a pack to generate a new puzzle.
+3. **Booster Station (NEW)** — animated **free** surprise booster; each contains three word cards with French meaning and example. One starter ticket, then one new ticket every 120 XP earned; no purchases, ads, paid currencies, or rarity marketing. Card album saved locally.
+4. **Letter Lab (NEW)** — unscramble English words from French prompts, 10-word sessions and feedback.
+5. **Flip Memory (NEW)** — turn 12 cards and find six English–French pairs.
+6. **Challenge Mode** — timed 12-question vocabulary challenge.
+7. **Practice Zone** — flashcards, listening, spelling and matching.
+8. **Story Mode** — three interactive stories.
+9. **2-Player Battle** — local turn-taking, no online account.
 
-**IMPORTANT:** This is a pedagogical selection developed *from* the programme, not an official, exhaustive or verbatim vocabulary list. Many words and examples are original educational extensions. Both provided PDF files remain separate source material and are NOT reproduced or bundled in this app. Review the entries and edit them to suit your own teaching sequence.
+The existing rewards, avatar customisation, badges, teacher pack creation, vocabulary search, and local progression are retained from V2. V3 keeps the old `localStorage` key, so progress and teacher-made packs normally survive when deployed at the same website URL using the same browser. Changing the repository address or browser does not transfer the local data.
 
-The complete new-deck content, including examples, can be inspected in `WORDUP-VOCABULARY-INDEX.txt`; the machine-readable deck data is in `vocab-2026.js`.
+## Important: previous independent WordUp app
+
+The *original* WordUp HTML/ZIP with its historic crosswords, opening boosters and older games was **not provided**. These V3 crosswords, boosters and new games are **newly implemented replacements**, not a byte-for-byte recovery of a previous unrelated WordUp app. To integrate older game modes precisely, supply the original project's `index.html` or ZIP.
 
 ## Installation
 
-1. Download and extract `WORDUP-ARCADE-V2.zip`.
-2. Open `WORDUP-ARCADE-V2/index.html` with your browser (no server required).
-3. To publish, create/open your GitHub repository and copy the **contents** of `WORDUP-ARCADE-V2/` into the **repository root** (including `assets/`, `vocab-2026.js`, `app.js`, `styles.css` and `index.html`).
-4. Activate GitHub Pages from the main branch/root if not already activated.
-5. Use refresh after deployment. Browser caching could temporarily keep the old version; perform a hard refresh if necessary.
+1. Download `WORDUP-ARCADE-V3.zip` and extract it.
+2. For an offline test, open `index.html` in a current browser (Chromium, Firefox, Edge, Safari). English speech uses browser-provided voices.
+3. To publish to GitHub Pages, copy the **contents** of the `WORDUP-ARCADE-V3` folder into the root of the GitHub repository. Required files: `index.html`, `styles.css`, `app.js`, `vocab-2026.js`, `vocab-extra.js`, and the `assets/` folder.
+4. Activate Pages from your main branch/root. Do a full refresh if the browser still shows an older release.
 
-### Updating an existing V1 deployment
+## Sources and educational framing
 
-Replacing V1's `index.html`, `styles.css`, `app.js`, copying `vocab-2026.js` and retaining the `assets/` directory updates the app. Do not delete `vocab-2026.js` — V2 loads it before `app.js`.
+The **2025 French collège English curriculum** and the **2026 English teaching support booklet**, both supplied by the user, informed the class levels, cultural axes and learning situations. The 600 V3 entries and their sample sentences are independently developed pedagogical additions informed by programme themes; they are **not** an official ministry vocabulary list, nor a claim that every term appears verbatim in those PDFs. Teacher review and sequencing by class remain important.
 
-### Custom packs in Teacher Studio
+## Data protection
 
-A teacher can create local word packs with semicolon-separated `English;French;Example` rows. These custom packs stay in browser local storage and cannot automatically sync between pupils. They appear in the **BONUS** filter. For shared words across all pupils, add entries to `vocab-2026.js` and redeploy the repository.
-
-## Data and privacy
-
-The app does not require accounts, servers, subscriptions, or student identity information. Progress and custom packs stay on the device in `localStorage`. Speech playback uses the browser's available English voice; voice quality varies by operating system and browser. No teacher tracking or cross-device synchronisation.
-
-## Notes for future versions
-
-- Revisit repeated words across years in spaced-retrieval sessions.
-- Add authentic documents/audio and teacher-controlled projects by cultural axis.
-- Improve speech voices through vetted on-device recordings where possible.
-- Add export/import of teacher custom packs and personalised vocabulary sets.
+No student accounts, no servers, no analytics, and no purchases. XP, word cards, boosters, games and custom packs stay in browser `localStorage` only. Do not clear browser storage if you want to keep the progress. CSS uses optional hosted Google Fonts with built-in fallbacks; all app images and word-pack data are included in the ZIP.

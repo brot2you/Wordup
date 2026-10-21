@@ -1,4 +1,4 @@
-/* WORDUP ARCADE V2 — 2025 programme + 2026 livret, expanded teacher-curated lexicon. */
+/* WORDUP ARCADE V3 — 2025 programme + 2026 livret, expanded teacher-curated lexicon. */
 'use strict';
 const STORAGE_KEY='brot2you-wordup-arcade-v1';
 const $=(s,base=document)=>base.querySelector(s);
@@ -25,7 +25,7 @@ const LEGACY_PACKS=[
  {id:'mystery',title:'Mystery Quest',emoji:'🔎',level:'A2–B1',words:asWords([
  ['clue','indice','🔎','The detective found a clue.'],['suspect','suspect','🕵️','The suspect was near the museum.'],['evidence','preuve','🧩','We need evidence to solve the case.'],['witness','témoin','👁️','A witness saw the red bicycle.'],['disappear','disparaître','🌫️','The keys disappear every night.'],['secret','secret','🔐','The letter contains a secret.'],['mysterious','mystérieux','🌙','A mysterious sound came from the room.'],['investigate','enquêter','🧐','They investigate the strange event.'],['footprints','empreintes de pas','👣','There are footprints near the door.'],['solve','résoudre','🧠','Can you solve this puzzle?'],['hidden','caché','🗝️','The hidden door is behind the painting.'],['discover','découvrir','✨','We discover a new clue in the garden.']])}
 ];
-const PACKS=[...CURRICULUM_PACKS,...LEGACY_PACKS.map(p=>({...p,grade:'extra',axis:0}))];
+const PACKS=[...CURRICULUM_PACKS,...EXTENDED_PACKS,...LEGACY_PACKS.map(p=>({...p,grade:'extra',axis:0}))];
 const STORIES=[
  {id:'treasure',name:'The Lost Treasure',emoji:'🗺️',subtitle:'An island adventure',steps:[
  {text:'You find an old map on a beach. Your friend asks what you want to do.',question:'What is the best reply?',options:['Let’s follow the map!','I am a map.','The beach is yesterday.'],correct:0,note:'“Let’s” is a friendly way to make a suggestion.'},
@@ -68,7 +68,7 @@ function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('sh
 function award(points){const oldBadges=earnedBadges().length,oldLevel=level();state.xp+=points;save();if(level()>oldLevel){tone('win');toast('LEVEL UP! You reached level '+level()+'! ✨');confetti();}else if(earnedBadges().length>oldBadges){toast('New badge unlocked! 🏅');}}
 function recordAnswer(ok,points=10){state.attempts++;if(ok){state.correct++;award(points);}else save();tone(ok?'correct':'wrong');}
 function go(screen){clearChallengeTimer();view=screen;render();window.scrollTo({top:0,behavior:'smooth'});}
-const modes=[['quest','Arcade Quests','🎮','quest'],['challenge','Challenge Mode','🏆','challenge'],['practice','Practice Zone','⚡','practice'],['story','Story Mode','📖','story'],['duel','2-Player Battle','👥','duel']];
+const modes=[['quest','Arcade Quests','🎮','quest'],['crossword','Crossword Lab','🧩','practice'],['booster','Booster Station','🎁','rewards'],['scramble','Letter Lab','🔠','challenge'],['memory','Flip Memory','🃏','practice'],['challenge','Challenge Mode','🏆','challenge'],['practice','Practice Zone','⚡','practice'],['story','Story Mode','📖','story'],['duel','2-Player Battle','👥','duel']];
 const modeCards=()=>modes.map(([id,name,icon,img])=>`<button class="mode-card mode-${id}" data-action="mode" data-id="${id}" aria-label="Play ${esc(name)}"><span class="mode-icon">${icon}</span><h3>${esc(name)}</h3><span class="mode-visual"><img src="assets/${img}.webp" alt="" loading="lazy"></span><span class="play-tag">▶ PLAY</span></button>`).join('');
 const totalEntries=()=>getPacks().reduce((n,p)=>n+p.words.length,0);
 const uniqueWords=()=>new Set(getPacks().flatMap(p=>p.words.map(w=>normal(w.en)))).size;
@@ -79,7 +79,7 @@ const deckGrid=(selected=state.pack)=>`<div class="pack-explorer">${filterContro
 const gameHead=(icon,title,subtitle,back='home')=>`<div class="game-head"><button class="soft-btn" data-action="back" data-id="${back}">← Back</button><span style="font-size:36px">${icon}</span><div><h1>${esc(title)}</h1><p>${esc(subtitle)}</p></div></div>`;
 const sideArt=(name,title,desc)=>`<aside class="side-art ${name}-art"><div class="side-overlay"><b>${esc(title)}</b><p>${esc(desc)}</p></div></aside>`;
 const nextActions=(action,label='CONTINUE →')=>`<div class="board-actions"><button class="action-btn" data-action="${action}">${label}</button></div>`;
-function home(){const pack=activePack();return `<div class="screen"><section class="hero"><div class="hero-content"><span class="hero-kicker">✦ YOUR ENGLISH ADVENTURE ✦</span><h1>Play. Learn.<br><em>Level up!</em></h1><p>Explore 6e–3e vocabulary from the English curriculum. Play, practise and collect rewards!</p><button class="action-btn" data-action="mode" data-id="quest">▶ START PLAYING</button></div></section><div class="section-title"><h2>✦ CHOOSE YOUR GAME MODE ✦</h2></div><section class="mode-grid" aria-label="Game modes">${modeCards()}</section><section class="bottom-grid"><div class="panel"><div class="split"><div><h3>🌍 Choose your word world</h3><p>6e, 5e, 4e or 3e: pick a grade, theme or a word.</p></div><span class="tag">${getPacks().length} WORLDS · ${totalEntries()} ENTRIES</span></div>${deckGrid()}</div><div class="panel"><h3>✨ Your next mission</h3><div class="featured"><span class="featured-icon">${pack.emoji}</span><div><strong>${esc(pack.title)}</strong><p>${pack.words.length} words · ${esc(pack.level)} · 8-question quest</p><button class="action-btn" data-action="start-quest" data-id="${esc(pack.id)}">GO TO QUEST →</button></div></div><div class="spacer"></div><h3>🏅 Your adventure</h3><p>${Object.keys(state.quests).length} worlds completed · ${state.correct} answers mastered · ${earnedBadges().length} badges</p><div class="progress-mini"><i style="width:${Math.min(100,Object.keys(state.quests).length/getPacks().length*100)}%"></i></div><div class="board-actions"><button class="soft-btn" data-action="mode" data-id="rewards">🎁 Rewards & avatar</button><button class="action-btn" data-action="mode" data-id="library">📚 WORD LIBRARY</button></div></div></section></div>`;}
+function home(){const pack=activePack();return `<div class="screen"><section class="hero"><div class="hero-content"><span class="hero-kicker">✦ YOUR ENGLISH ADVENTURE ✦</span><h1>Play. Learn.<br><em>Level up!</em></h1><p>Explore 6e–3e vocabulary from the English curriculum. Solve crosswords, open boosters, play memory games and learn English!</p><button class="action-btn" data-action="mode" data-id="quest">▶ START PLAYING</button></div></section><div class="section-title"><h2>✦ CHOOSE YOUR GAME MODE ✦</h2></div><section class="mode-grid" aria-label="Game modes">${modeCards()}</section><section class="bottom-grid"><div class="panel"><div class="split"><div><h3>🌍 Choose your word world</h3><p>6e, 5e, 4e or 3e: pick a grade, theme or a word.</p></div><span class="tag">${getPacks().length} WORLDS · ${totalEntries()} ENTRIES</span></div>${deckGrid()}</div><div class="panel"><h3>✨ Your next mission</h3><div class="featured"><span class="featured-icon">${pack.emoji}</span><div><strong>${esc(pack.title)}</strong><p>${pack.words.length} words · ${esc(pack.level)} · 8-question quest</p><button class="action-btn" data-action="start-quest" data-id="${esc(pack.id)}">GO TO QUEST →</button></div></div><div class="spacer"></div><h3>🏅 Your adventure</h3><p>${Object.keys(state.quests).length} worlds completed · ${state.correct} answers mastered · ${earnedBadges().length} badges</p><div class="progress-mini"><i style="width:${Math.min(100,Object.keys(state.quests).length/getPacks().length*100)}%"></i></div><div class="board-actions"><button class="soft-btn" data-action="mode" data-id="booster">🎁 OPEN BOOSTERS (${boosterTickets()})</button><button class="soft-btn" data-action="mode" data-id="rewards">🏅 Rewards</button><button class="action-btn" data-action="mode" data-id="library">📚 WORD LIBRARY</button></div></div></section></div>`;}
 function questMap(){return `<div class="screen">${gameHead('🎮','Arcade Quests','Explore curriculum-based word worlds from 6e to 3e.')}<div class="panel">${filterControls()}<p class="search-results">${filteredPacks().length} worlds available for this selection</p></div><div class="quest-grid">${filteredPacks().map((p,i)=>`<button class="quest-node" data-action="start-quest" data-id="${esc(p.id)}"><span class="node-stars">${state.quests[p.id]?'⭐⭐⭐':'☆☆☆'}</span><div class="emoji">${p.emoji}</div><h3>${esc(p.title)}</h3><p>${p.grade==='extra'?'BONUS':p.grade+' · AXIS '+(p.axis===7?'FOCUS':p.axis)} · ${esc(p.level)} · ${p.words.length} words</p><span class="tag" style="display:inline-block;margin-top:12px">${state.quests[p.id]?'REPLAY':'▶ PLAY QUEST'}</span></button>`).join('')||'<div class="panel"><p>No matching worlds. Clear your search or pick a different year.</p></div>'}</div><div class="panel" style="margin-top:17px"><b>💡 How to play</b><p>Answer eight vocabulary questions in English. Each world contains contextualised sentences. Revisit the words in Practice Zone and Word Library.</p></div></div>`;}
 function generateQuestion(pack,forcedKind,forcedWord){const words=pack.words;const word=forcedWord||sample(words,1)[0];const kind=forcedKind||sample(['en-fr','fr-en','gap'],1)[0];let title,tip,answer,options;
  if(kind==='en-fr'){title=`What does “${word.en}” mean?`;tip='Choose the French translation.';answer=word.fr;options=sample(words.filter(w=>w.fr!==answer).map(w=>w.fr),3).concat(answer);}
@@ -128,12 +128,196 @@ function importPack(){const title=$('#pack-title')?.value.trim()||'',raw=$('#pac
  const id='custom-'+Date.now();state.custom.push({id,title,emoji:'🪄',level:'YOUR CLASS',grade:'extra',axis:0,words});state.pack=id;gradeFilter='extra';deckSearch='';save();closeTeacher();go('home');toast('Your custom pack is ready! ✨');}
 function deletePack(id){state.custom=state.custom.filter(p=>p.id!==id);if(state.pack===id)state.pack='curr-6-1';save();closeTeacher();openTeacher();toast('Custom pack deleted.');}
 function wordLibrary(){const packs=filteredPacks();const query=normal(deckSearch);const entries=packs.flatMap(p=>p.words.filter(w=>!query||[w.en,w.fr,w.example].some(x=>normal(x).includes(query))).map(w=>({pack:p,w})));const seen=new Set();const unique=entries.filter(({w})=>{const key=normal(w.en);if(seen.has(key))return false;seen.add(key);return true;});const current=unique.slice(0,libraryLimit);return `<div class="screen">${gameHead('📚','Word Library','Search, hear, and review English words from the 2025 collège curriculum.')}<div class="panel"><div class="split"><div><h3>🔍 Explore your vocabulary</h3><p>Filter by class level and type a word in English or French.</p></div><span class="tag">${uniqueWords()} UNIQUE WORDS IN ARCADE</span></div>${filterControls()}<p class="search-results">${unique.length} distinct English terms in this selection · ${totalEntries()} entries in total</p></div><div class="library-grid">${current.map(({pack:p,w})=>{const key=p.id+':'+w.en;return `<article class="word-tile"><div class="split"><span class="tag">${p.emoji} ${p.grade==='extra'?'BONUS':p.grade}</span><span class="small muted">${esc(p.title)}</span></div><h3>${esc(w.en)}</h3><p class="translation">${esc(w.fr)}</p><p class="example">“${esc(w.example)}”</p><div class="flex"><button class="soft-btn" data-action="speak" data-value="${esc(w.example)}">🔊 Listen</button><button class="soft-btn" data-action="known" data-value="${esc(key)}" ${state.known[key]?'disabled':''}>${state.known[key]?'✓ Known':'✓ I know this'}</button></div></article>`;}).join('')||'<div class="panel"><p>No results. Try searching another word or changing class level.</p></div>'}</div>${libraryLimit<unique.length?`<div class="board-actions center" style="justify-content:center"><button class="action-btn" data-action="more-words">＋ SHOW MORE WORDS (${libraryLimit} / ${unique.length})</button></div>`:''}<p class="help-text">The decks are an original pedagogical selection based on official themes, not an exhaustive official vocabulary list. English pronunciation uses your browser's speech voices.</p></div>`;}
-function render(){const app=$('#app');const views={home,quest:questMap,quiz,challenge:challengeLanding,practice,story:stories,storyplay:storyPlay,duel:duelLanding,rewards,library:wordLibrary};app.innerHTML=(views[view]||home)();updateHeader();}
+/* V3: original crossword, word scramble, matching memory and free collectible word boosters. */
+let crosswordState=null, scrambleSession=null, memorySession=null, boosterSession=null, albumLimit=36;
+state.boostersOpened=Number.isFinite(state.boostersOpened)?state.boostersOpened:0;
+state.cards=state.cards&&typeof state.cards==='object'?state.cards:{};
+state.crosswordWins=state.crosswordWins&&typeof state.crosswordWins==='object'?state.crosswordWins:{};
+const boosterTickets=()=>Math.max(0,1+Math.floor(Math.max(0,state.xp)/120)-state.boostersOpened);
+const allCollectibleWords=()=>{
+ const seen=new Set();return getPacks().flatMap(p=>p.words.map(w=>({p,w}))).filter(({w})=>{
+ const id=normal(w.en);if(!id||seen.has(id))return false;seen.add(id);return true;
+ });
+};
+function crosswordWords(pack){
+ let eligible=pack.words.filter(w=>/^[a-z]{3,12}$/i.test(w.en));
+ if(eligible.length<8)eligible=getPacks().filter(p=>p.grade===pack.grade).flatMap(p=>p.words).filter(w=>/^[a-z]{3,12}$/i.test(w.en));
+ const seen=new Set();return shuffle(eligible).filter(w=>{const name=normal(w.en);if(seen.has(name))return false;seen.add(name);return true;});
+}
+function buildCrossword(pack){
+ const size=17,pool=crosswordWords(pack),grid=Array.from({length:size},()=>Array(size).fill(''));
+ const dirs=Array.from({length:size},()=>Array.from({length:size},()=>new Set()));
+ const entries=[];
+ const inside=(r,c)=>r>=0&&c>=0&&r<size&&c<size;
+ const empty=(r,c)=>!inside(r,c)||!grid[r][c];
+ function fits(word,row,col,direction,first=false){
+  let crosses=0;
+  const dr=direction==='down'?1:0,dc=direction==='across'?1:0;
+  if(!inside(row,col)||!inside(row+dr*(word.length-1),col+dc*(word.length-1)))return -1;
+  if(!empty(row-dr,col-dc)||!empty(row+dr*word.length,col+dc*word.length))return -1;
+  for(let i=0;i<word.length;i++){
+   const r=row+dr*i,c=col+dc*i,here=grid[r][c];
+   if(here){if(here!==word[i]||dirs[r][c].has(direction))return -1;crosses++;}
+   else if(direction==='across'){
+    if(!empty(r-1,c)||!empty(r+1,c))return -1;
+   } else if(!empty(r,c-1)||!empty(r,c+1))return -1;
+  }
+  return !first&&crosses===0?-1:crosses;
+ }
+ function insert(w,r,c,d){
+  const word=w.en.toUpperCase(),dr=d==='down'?1:0,dc=d==='across'?1:0;
+  for(let i=0;i<word.length;i++){const rr=r+dr*i,cc=c+dc*i;grid[rr][cc]=word[i];dirs[rr][cc].add(d);}
+  entries.push({en:w.en,fr:w.fr,word,row:r,col:c,dir:d});
+ }
+ if(pool.length<4)return null;
+ const chosen=sample(pool.filter(w=>w.en.length<=11),1)[0];
+ if(!chosen)return null;
+ const first=chosen.en.toUpperCase(),row=8,col=Math.floor((size-first.length)/2);
+ insert(chosen,row,col,'across');
+ const unused=pool.filter(w=>w!==chosen);
+ for(const w of unused){
+  if(entries.length>=10)break;
+  const word=w.en.toUpperCase(),candidates=[];
+  for(let rr=0;rr<size;rr++)for(let cc=0;cc<size;cc++)if(grid[rr][cc]){
+   const ixs=[];for(let i=0;i<word.length;i++)if(word[i]===grid[rr][cc])ixs.push(i);
+   for(const i of ixs)for(const d of ['across','down']){
+    if(![...dirs[rr][cc]].some(x=>x!==d))continue;
+    const startRow=rr-(d==='down'?i:0),startCol=cc-(d==='across'?i:0);
+    const crosses=fits(word,startRow,startCol,d);
+    if(crosses>0)candidates.push({r:startRow,c:startCol,d,score:crosses*100-Math.abs(startRow-8)-Math.abs(startCol-8)});
+   }
+  }
+  if(!candidates.length)continue;
+  candidates.sort((a,b)=>b.score-a.score);
+  const best=sample(candidates.slice(0,Math.min(3,candidates.length)),1)[0];
+  insert(w,best.r,best.c,best.d);
+ }
+ if(entries.length<4)return null;
+ const seen=new Map();let number=0;
+ entries.slice().sort((a,b)=>a.row-b.row||a.col-b.col).forEach(x=>{
+  const k=x.row+'-'+x.col;if(!seen.has(k))seen.set(k,++number);x.no=seen.get(k);
+ });
+ let rmin=size-1,rmax=0,cmin=size-1,cmax=0;
+ entries.forEach(e=>{for(let i=0;i<e.word.length;i++){
+  const r=e.row+(e.dir==='down'?i:0),c=e.col+(e.dir==='across'?i:0);
+  rmin=Math.min(rmin,r);rmax=Math.max(rmax,r);cmin=Math.min(cmin,c);cmax=Math.max(cmax,c);
+ }});
+ return {pack:pack.id,grid,entries,seen,values:{},done:false,hints:0,rmin,rmax,cmin,cmax};
+}
+function startCrossword(){
+ let candidate=null;
+ for(let tries=0;tries<7;tries++){
+  const x=buildCrossword(activePack());
+  if(x&&(!candidate||x.entries.length>candidate.entries.length))candidate=x;
+  if(candidate?.entries.length>=7)break;
+ }
+ crosswordState=candidate;
+ go('crossword');
+}
+function crosswordScreen(){
+ const c=crosswordState,pack=activePack();
+ if(!c)return `<div class="screen">${gameHead('🧩','Crossword Challenge','Choose another word world to make a crossword.')}<div class="panel"><p>We need more short, single-word terms for this world.</p>${deckGrid()}<button class="action-btn" data-action="new-crossword">GENERATE GRID</button></div></div>`;
+ const cols=c.cmax-c.cmin+1,nums=c.seen;
+ let cells='';
+ for(let r=c.rmin;r<=c.rmax;r++)for(let x=c.cmin;x<=c.cmax;x++){
+  const letter=c.grid[r][x],key=r+'-'+x;
+  if(!letter){cells+='<span class="cw-blank" aria-hidden="true"></span>';continue;}
+  cells+=`<label class="cw-cell">${nums.has(key)?`<small>${nums.get(key)}</small>`:''}<input class="cw-input" type="text" maxlength="1" inputmode="text" autocapitalize="characters" autocomplete="off" data-key="${key}" data-row="${r}" data-col="${x}" aria-label="Crossword cell row ${r-c.rmin+1}, column ${x-c.cmin+1}" value="${esc(c.values[key]||'')}" ${c.done?'disabled':''}></label>`;
+ }
+ const clues=type=>c.entries.filter(e=>e.dir===type).sort((a,b)=>a.no-b.no).map(e=>`<li><strong>${e.no}.</strong> ${esc(e.fr)} <span class="muted">(${e.word.length})</span></li>`).join('');
+ return `<div class="screen">${gameHead('🧩','Crossword Challenge',`${pack.title} · Translate the French clues into English.`)}<div class="panel"><div class="split"><span class="tag">${c.entries.length} CROSSING WORDS</span><span class="tag">${c.hints} HINTS</span></div><div class="crossword-layout"><div class="cw-scroll"><div class="cw-grid" style="--cw-cols:${cols}">${cells}</div></div><div class="cw-clues"><h3>➡️ Across</h3><ol>${clues('across')}</ol><h3>⬇️ Down</h3><ol>${clues('down')}</ol></div></div>${c.done?`<div class="feedback good">🎉 Completed! All your English answers are correct.</div>`:`<p class="help-text">Type one letter per square. Words cross in shared squares. Use the French clues to find the English words.</p>`}<div class="board-actions"><button class="action-btn" data-action="check-crossword" ${c.done?'disabled':''}>✓ CHECK WORDS</button><button class="soft-btn" data-action="hint-crossword" ${c.done?'disabled':''}>💡 REVEAL A LETTER</button><button class="soft-btn" data-action="new-crossword">↻ NEW GRID</button></div></div><div class="panel" style="margin-top:18px"><h3>Change the crossword world</h3>${deckGrid()}</div></div>`;
+}
+function checkCrossword(){
+ const c=crosswordState;if(!c||c.done)return;
+ let correct=true;
+ for(let r=c.rmin;r<=c.rmax;r++)for(let col=c.cmin;col<=c.cmax;col++){
+  if(!c.grid[r][col])continue;
+  const k=r+'-'+col,ok=c.values[k]===c.grid[r][col];if(!ok)correct=false;
+  const input=$(`.cw-input[data-key="${k}"]`);if(input)input.classList.toggle('incorrect',!ok&&Boolean(c.values[k]));
+ }
+ if(!correct){tone('wrong');toast('Not yet! Check the highlighted letters and finish the empty squares.');return;}
+ c.done=true;
+ const firstWin=!state.crosswordWins[c.pack];state.crosswordWins[c.pack]=true;save();
+ if(firstWin)award(45);tone('win');confetti();toast(firstWin?'Crossword solved! +45 XP':'Crossword solved!');render();
+}
+function hintCrossword(){
+ const c=crosswordState;if(!c||c.done)return;
+ const wrong=[];
+ for(let r=c.rmin;r<=c.rmax;r++)for(let col=c.cmin;col<=c.cmax;col++){
+  if(c.grid[r][col]&&c.values[r+'-'+col]!==c.grid[r][col])wrong.push([r,col]);
+ }
+ if(!wrong.length){checkCrossword();return;}
+ const [r,col]=sample(wrong,1)[0];c.values[r+'-'+col]=c.grid[r][col];c.hints++;render();
+}
+function scramblePool(){
+ const pack=activePack();let words=pack.words.filter(w=>/^[A-Za-z]{4,12}$/.test(w.en));
+ if(words.length<6)words=getPacks().filter(p=>p.grade===pack.grade).flatMap(p=>p.words).filter(w=>/^[A-Za-z]{4,12}$/.test(w.en));
+ return sample(words.filter((w,i,a)=>a.findIndex(v=>v.en===w.en)===i),10);
+}
+function scrambleLetters(word){let letters=word.toUpperCase().split(''),attempt=0,s=letters.join('');while(s===word.toUpperCase()&&attempt++<15)s=shuffle(letters).join('');return s;}
+function startScramble(){const words=scramblePool();if(!words.length){toast('Please choose a different word world.');return;}scrambleSession={pack:activePack().id,words,round:0,score:0,answered:false,guess:'',letters:scrambleLetters(words[0].en),done:false};go('scramble');}
+function scrambleScreen(){
+ const s=scrambleSession;if(!s)return `<div class="screen">${gameHead('🔠','Letter Lab','Unscramble vocabulary words.')}<button class="action-btn" data-action="new-scramble">START</button></div>`;
+ const word=s.words[s.round];return `<div class="screen">${gameHead('🔠','Letter Lab',`${getPack(s.pack).title} · Put the English letters in the correct order.`)}<div class="game-layout"><div class="game-board"><div class="split"><span class="tag">ROUND ${s.round+1}/${s.words.length}</span><span class="tag">⭐ ${s.score} CORRECT</span></div><div class="meter"><i style="width:${(s.round/s.words.length)*100}%"></i></div><h2 class="center" style="font:800 31px var(--title)">💬 ${esc(word.fr)}</h2><div class="scramble-tiles">${s.letters.split('').map(c=>`<span>${esc(c)}</span>`).join('')}</div><form id="scramble-form"><label for="scramble-answer" class="help-text">Write the English word</label><input id="scramble-answer" class="input-answer" name="answer" required autocomplete="off" maxlength="15" placeholder="Type your answer…" value="${esc(s.guess)}" ${s.answered?'disabled':''}><div class="board-actions">${!s.answered?'<button class="action-btn" type="submit">✓ CHECK ANSWER</button>':`<button class="action-btn" type="button" data-action="scramble-next">${s.round===s.words.length-1?'SEE RESULTS →':'NEXT WORD →'}</button>`}</div></form>${s.answered?`<div class="feedback ${normal(s.guess)===normal(word.en)?'good':'bad'}">${normal(s.guess)===normal(word.en)?'✅ Excellent!':'💡 Correct word: '+esc(word.en)}<p>${esc(word.example)}</p><button class="soft-btn" data-action="speak" data-value="${esc(word.example)}">🔊 Hear the sentence</button></div>`:''}</div>${sideArt('practice','Build the word','Remember its spelling, then hear it in a sentence.')}</div><div class="panel" style="margin-top:18px"><h3>Choose a vocabulary pack</h3>${deckGrid()}</div></div>`;
+}
+function checkScramble(guess){const s=scrambleSession;if(!s||s.answered)return;const w=s.words[s.round];s.guess=String(guess).trim();s.answered=true;const ok=normal(s.guess)===normal(w.en);if(ok)s.score++;recordAnswer(ok,8);render();}
+function scrambleNext(){const s=scrambleSession;if(!s||!s.answered)return;s.round++;if(s.round>=s.words.length){if(s.score>=6){confetti();award(20);}go('scrambleresult');return;}s.answered=false;s.guess='';s.letters=scrambleLetters(s.words[s.round].en);render();}
+function scrambleResult(){const s=scrambleSession;if(!s)return home();return `<div class="screen">${gameHead('🔠','Letter Lab — Results','You finished the letter challenge.')}<div class="game-board center"><div class="finish-icon">🏆</div><h2 class="finish-heading">${s.score} / ${s.words.length} words</h2><p>Practice makes every new word easier to remember.</p><div class="board-actions" style="justify-content:center"><button class="action-btn" data-action="new-scramble">↻ PLAY AGAIN</button><button class="soft-btn" data-action="mode" data-id="home">HOME</button></div></div></div>`;}
+function startMemory(){
+ const pack=activePack();const uniqueEN=new Set(),uniqueFR=new Set();const possible=shuffle(pack.words).filter(w=>{const en=normal(w.en),fr=normal(w.fr);if(uniqueEN.has(en)||uniqueFR.has(fr))return false;uniqueEN.add(en);uniqueFR.add(fr);return true;});const words=sample(possible,6);
+ if(words.length<4){toast('Pick a pack with at least four words.');return;}
+ const cards=shuffle(words.flatMap((w,i)=>[{id:'en-'+i,pair:i,label:w.en,side:'EN'},{id:'fr-'+i,pair:i,label:w.fr,side:'FR'}]));
+ memorySession={pack:pack.id,cards,shown:[],matched:[],turns:0,busy:false,done:false};go('memory');
+}
+function memoryScreen(){const m=memorySession;if(!m)return home();const isShown=x=>m.shown.includes(x.id)||m.matched.includes(x.pair);
+ return `<div class="screen">${gameHead('🃏','Flip Memory',`${getPack(m.pack).title} · Turn cards and find English–French pairs.`)}<div class="panel"><div class="split"><span class="tag">${m.matched.length} / ${m.cards.length/2} MATCHES</span><span class="tag">${m.turns} TURNS</span></div><div class="memory-grid">${m.cards.map(c=>`<button class="memory-card ${isShown(c)?'is-open':''} ${m.matched.includes(c.pair)?'is-matched':''}" data-action="memory-flip" data-id="${c.id}" ${m.busy||m.matched.includes(c.pair)?'disabled':''} aria-label="${isShown(c)?esc(c.side+' '+c.label):'Face-down card'}"><span class="memory-back">★</span><span class="memory-face"><small>${c.side}</small>${esc(c.label)}</span></button>`).join('')}</div>${m.done?'<div class="feedback good">✨ Brilliant memory! You matched every word.</div>':''}<div class="board-actions"><button class="action-btn" data-action="new-memory">↻ NEW GAME</button><button class="soft-btn" data-action="mode" data-id="library">📚 WORD LIBRARY</button></div></div><div class="panel" style="margin-top:18px"><h3>Choose another vocabulary world</h3>${deckGrid()}</div></div>`;
+}
+function memoryFlip(id){
+ const m=memorySession;if(!m||m.busy||m.done||m.shown.includes(id))return;
+ const card=m.cards.find(c=>c.id===id);if(!card||m.matched.includes(card.pair))return;
+ m.shown.push(id);
+ if(m.shown.length===1){render();return;}
+ m.turns++;m.busy=true;render();
+ const [a,b]=m.shown.map(k=>m.cards.find(c=>c.id===k));
+ if(a.pair===b.pair){setTimeout(()=>{if(memorySession!==m)return;m.matched.push(a.pair);m.shown=[];m.busy=false;recordAnswer(true,6);if(m.matched.length===m.cards.length/2){m.done=true;award(30);tone('win');confetti();}render();},540);}
+ else{tone('wrong');setTimeout(()=>{if(memorySession!==m)return;m.shown=[];m.busy=false;render();},1100);}
+}
+function boosterScreen(){
+ const ticketCount=boosterTickets(),collected=Object.keys(state.cards).length,all=allCollectibleWords().length;
+ const display=boosterSession?.cards||[];
+ const opened=boosterSession&&display.length;
+ return `<div class="screen">${gameHead('🎁','Booster Station','Open FREE vocabulary surprise packs and grow your word-card album.')}<section class="booster-stage"><div class="split"><span class="tag">🎟️ ${ticketCount} FREE TICKETS</span><span class="tag">🃏 ${collected} / ${all} UNIQUE CARDS</span></div><div class="booster-box ${opened?'opened':''}"><div class="booster-glow"></div><span>⭐</span><b>WORDUP<br>BOOSTER</b><small>3 WORD CARDS · NO PURCHASES</small></div>${!opened?`<p>Get a starter pack free, then earn a new ticket every 120 XP. You can collect words by practising, not by spending money.</p><button class="action-btn" data-action="open-booster" ${ticketCount<=0||collected>=all?'disabled':''}>✨ OPEN BOOSTER</button>`:`<div class="booster-card-grid">${display.map((x,i)=>`<button class="booster-word-card ${boosterSession.revealed.includes(i)?'revealed':''}" data-action="reveal-booster" data-index="${i}" ${boosterSession.revealed.includes(i)?'disabled':''}>${boosterSession.revealed.includes(i)?`<span class="boost-label">${esc(x.p.title)}</span><strong>${esc(x.w.en)}</strong><em>${esc(x.w.fr)}</em><small>🗣 ${esc(x.w.example)}</small>`:'<span class="boost-mystery">?</span><b>FLIP CARD</b>'}</button>`).join('')}</div>${boosterSession.revealed.length===display.length?'<div class="feedback good">🎉 Three cards added to your album! Discover more vocabulary by playing.</div><button class="action-btn" data-action="booster-finish">CONTINUE →</button>':'<p>Tap each card to reveal the English word and its meaning.</p>'}`}</section><div class="panel" style="margin-top:19px"><h3>🃏 My Word Card Album</h3><p>Collectible English words with French meanings and example sentences. Your collection stays on this browser.</p>${collected?`<div class="album-grid">${allCollectibleWords().filter(({w})=>state.cards[normal(w.en)]).slice(0,36).map(({p,w})=>`<article class="album-card"><span>${p.emoji}</span><strong>${esc(w.en)}</strong><small>${esc(w.fr)}</small><button class="soft-btn" data-action="speak" data-value="${esc(w.example)}">🔊</button></article>`).join('')}</div>${collected>albumLimit?`<div class="board-actions" style="justify-content:center"><button class="soft-btn" data-action="album-more">SHOW MORE CARDS (${albumLimit} / ${collected})</button></div>`:''}`:'<p class="help-text">Your album is empty. Open your free starter booster to collect your first cards!</p>'}</div></div>`;
+}
+function openBooster(){
+ if(boosterTickets()<1){toast('Earn XP in games to unlock the next free booster.');return;}
+ let pool=allCollectibleWords().filter(({w})=>!state.cards[normal(w.en)]);
+ if(pool.length<3){toast('You have collected almost every available word!');return;}
+ // The selected school level determines the booster category whenever possible.
+ const filtered=pool.filter(x=>gradeFilter==='all'||x.p.grade===gradeFilter);
+ if(filtered.length>=3)pool=filtered;
+ const cards=sample(pool,3);
+ cards.forEach(({w})=>{state.cards[normal(w.en)]=true;});
+ state.boostersOpened++;save();boosterSession={cards,revealed:[]};tone('win');render();
+}
+function revealBooster(index){const b=boosterSession;if(!b||b.revealed.includes(index)||!b.cards[index])return;b.revealed.push(index);tone('correct');if(b.revealed.length===b.cards.length)confetti();render();}
+
+function render(){const app=$('#app');const views={home,quest:questMap,quiz,challenge:challengeLanding,practice,story:stories,storyplay:storyPlay,duel:duelLanding,rewards,library:wordLibrary,crossword:crosswordScreen,booster:boosterScreen,scramble:scrambleScreen,scrambleresult:scrambleResult,memory:memoryScreen};app.innerHTML=(views[view]||home)();updateHeader();}
 function handleAction(button){if(button.disabled)return;const action=button.dataset.action,id=button.dataset.id,value=button.dataset.value;tone('click');switch(action){
- case 'mode':if(id==='practice'){initPractice();break;}go(id);break;
+ case 'mode':if(id==='practice'){initPractice();break;}if(id==='crossword'){startCrossword();break;}if(id==='scramble'){startScramble();break;}if(id==='memory'){startMemory();break;}go(id);break;
  case 'back':go(id||'home');break;
- case 'pack':state.pack=getPack(id).id;gradeFilter=getPack(id).grade||'all';deckSearch='';save();practiceIndex=0;flipped=false;practiceAnswered=false;practiceFeedback='';matchGame=null;render();break;
+ case 'pack':state.pack=getPack(id).id;gradeFilter=getPack(id).grade||'all';deckSearch='';save();practiceIndex=0;flipped=false;practiceAnswered=false;practiceFeedback='';matchGame=null;if(view==='crossword'){startCrossword();break;}if(view==='scramble'){startScramble();break;}if(view==='memory'){startMemory();break;}render();break;
  case 'start-quest':startQuest(id);break;
+ case 'new-crossword':startCrossword();break;
+ case 'check-crossword':checkCrossword();break;
+ case 'hint-crossword':hintCrossword();break;
+ case 'new-scramble':startScramble();break;
+ case 'scramble-next':scrambleNext();break;
+ case 'new-memory':startMemory();break;
+ case 'memory-flip':memoryFlip(id);break;
+ case 'open-booster':openBooster();break;
+ case 'reveal-booster':revealBooster(Number(button.dataset.index));break;
+ case 'booster-finish':boosterSession=null;render();break;
+ case 'album-more':albumLimit+=36;render();break;
  case 'grade':gradeFilter=id;deckSearch='';libraryLimit=35;render();break;
  case 'more-words':libraryLimit+=35;render();break;
  case 'start-challenge':startQuiz('challenge');break;
@@ -162,10 +346,10 @@ function handleAction(button){if(button.disabled)return;const action=button.data
  }}
 $('#app').addEventListener('click',e=>{const button=e.target.closest('[data-action]');if(button)handleAction(button);});
 $('#modal-root').addEventListener('click',e=>{const button=e.target.closest('[data-action]');if(button)handleAction(button);else if(e.target===$('#modal-root'))closeTeacher();});
-$('#app').addEventListener('input',e=>{if(e.target.id==='pack-search'){const position=e.target.selectionStart;deckSearch=e.target.value;libraryLimit=35;render();const field=$('#pack-search');if(field){field.focus();try{field.setSelectionRange(position,position);}catch(_){}}}});
-$('#app').addEventListener('submit',e=>{if(e.target.id==='spell-form'){e.preventDefault();checkSpelling(new FormData(e.target).get('answer')||'');}});
+$('#app').addEventListener('input',e=>{if(e.target.classList.contains('cw-input')){const key=e.target.dataset.key;const c=crosswordState;if(c){const v=e.target.value.replace(/[^a-z]/gi,'').slice(0,1).toUpperCase();c.values[key]=v;e.target.value=v;e.target.classList.remove('incorrect');if(v){const r=Number(e.target.dataset.row),col=Number(e.target.dataset.col);const next=$(`.cw-input[data-row="${r}"][data-col="${col+1}"]`);if(next)next.focus();}}return;}if(e.target.id==='pack-search'){const position=e.target.selectionStart;deckSearch=e.target.value;libraryLimit=35;render();const field=$('#pack-search');if(field){field.focus();try{field.setSelectionRange(position,position);}catch(_){}}}});
+$('#app').addEventListener('submit',e=>{if(e.target.id==='spell-form'){e.preventDefault();checkSpelling(new FormData(e.target).get('answer')||'');}else if(e.target.id==='scramble-form'){e.preventDefault();checkScramble(new FormData(e.target).get('answer')||'');}});
 $('#home-btn').addEventListener('click',()=>go('home'));
 $('#sound-btn').addEventListener('click',()=>{state.sound=!state.sound;save();toast(state.sound?'Sound on 🔊':'Sound off 🔇');});
 $('#teacher-btn').addEventListener('click',openTeacher);
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#modal-root').hidden)closeTeacher();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#modal-root').hidden)closeTeacher();if(e.target.classList?.contains('cw-input')){const r=Number(e.target.dataset.row),c=Number(e.target.dataset.col),d={ArrowRight:[0,1],ArrowLeft:[0,-1],ArrowDown:[1,0],ArrowUp:[-1,0]}[e.key];if(d){e.preventDefault();const next=$(`.cw-input[data-row="${r+d[0]}"][data-col="${c+d[1]}"]`);if(next)next.focus();}}});
 render();
