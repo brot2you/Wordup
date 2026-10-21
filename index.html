@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100b2a">
+  <meta name="description" content="WORDUP Arcade – Play, learn and level up your English vocabulary.">
+  <title>WORDUP ARCADE · Play. Learn. Level up.</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="glow glow-a" aria-hidden="true"></div><div class="glow glow-b" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <button id="home-btn" class="logo" aria-label="WORDUP Arcade home"><span class="logo-mark">W<span>★</span></span><span><strong>WORDUP</strong><small>ARCADE</small></span></button>
+      <div class="top-stats" aria-label="Player progress">
+        <div class="stat-pill avatar-pill" id="avatar-head">🧑‍🚀</div>
+        <div class="stat-pill"><span>⭐</span><b id="level-head">LV 1</b><div class="level-meter"><i id="level-meter"></i></div></div>
+        <div class="stat-pill"><span>⚡</span><b id="xp-head">0 XP</b></div>
+        <div class="stat-pill"><span>🏅</span><b id="badge-head">0</b></div>
+      </div>
+      <div class="header-actions"><button class="icon-btn" id="sound-btn" title="Sound on/off" aria-label="Sound settings">🔊</button><button class="icon-btn" id="teacher-btn" title="Teacher studio" aria-label="Teacher studio">✏️</button></div>
+    </header>
+    <main id="app" tabindex="-1"></main>
+    <footer class="footer"><span>Made for curious minds · BROT2YOU</span><span>Play · Learn · Level up</span></footer>
+  </div>
+  <div class="toast" id="toast" aria-live="polite"></div>
+  <div class="modal-backdrop" id="modal-root" hidden></div>
+  <script src="vocab-2026.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
