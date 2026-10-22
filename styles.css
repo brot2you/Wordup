@@ -81,3 +81,10 @@
 .classic-game-tile:hover,.classic-game-tile:focus-visible{transform:translateY(-4px);border-color:#ffda44}
 .classic-game-tile>span{font-size:43px}.classic-game-tile strong{font-size:1.24rem}.classic-game-tile small{font-size:.9rem;color:#bcd0ff;flex:1}.classic-game-tile b{color:#ffdc44;font-size:.9rem}
 @media(max-width:600px){.classic-portal-hero{padding:22px;min-height:275px}.classic-games-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.classic-game-tile{min-height:168px;padding:11px}.classic-game-tile small{font-size:.76rem}.classic-game-tile strong{font-size:1rem}}
+
+/* V4.1 · Author lockup directly beneath WORDUP title */
+.logo .brand-wordmark{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:0;min-width:0}
+.logo .brand-byline{display:flex;align-items:center;gap:7px;margin-top:5px;min-height:36px}
+.logo .brand-byline>span{font:italic 700 12px/1 var(--body);color:#dfc9ff;text-transform:lowercase;letter-spacing:1.5px}
+.logo .brand-byline img{width:54px;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 1px 3px rgba(255,255,255,.25))}
+@media(max-width:560px){.logo .brand-byline{margin-top:3px;min-height:31px}.logo .brand-byline img{width:48px}.logo strong{font-size:24px}.logo-mark{width:43px;height:43px}}

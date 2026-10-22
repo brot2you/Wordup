@@ -43,3 +43,8 @@ body:not([data-view="home"]):not([data-view="arcade"]):not([data-view="onboardin
 @media(min-width:800px){.games{grid-template-columns:repeat(4,minmax(0,1fr))}.games .wide{grid-column:span 2}.map{grid-template-columns:repeat(3,minmax(0,1fr))}.actions{grid-template-columns:repeat(3,minmax(0,1fr))}.actions .primary{grid-column:span 3}.mem{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:700px){.retro-banner{margin:12px 10px 0;padding:17px;min-height:170px}.retro-banner p{font-size:.83rem}.retro-top{padding:9px 10px}.retro-flag{display:none}.retro-brand{font-size:.85rem}.app{padding:14px 12px 115px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* V4.1 · Creator credit beneath original Word Up! onboarding title */
+.classic-brand-byline{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto 15px}
+.classic-brand-byline>span{font:italic 700 15px var(--body);color:#d5c9ff;letter-spacing:1.5px}
+.classic-brand-byline img{display:block;width:83px;height:auto;filter:drop-shadow(0 3px 8px #0006)}

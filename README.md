@@ -23,3 +23,6 @@ All 3,057 vocabulary entries are sourced either from the user-supplied original 
 
 ## Notes
 This is a functional V4 fusion with two connected game rooms (not yet a single unified scoring engine). Original games and progression algorithms remain intact and the design has been reskinned; extensive end-to-end testing can still surface edge cases in the original logic that existed prior to this fusion.
+
+## V4.1 branding update
+The supplied BROT2YOU APP logo has been integrated as a small **by [logo]** credit directly below the WORDUP title in the main arcade header and below the original Word Up! onboarding title. No game logic, vocabulary, local saves or collections were changed. Include `assets/brot2you-app-logo.png` when publishing.

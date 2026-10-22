@@ -945,7 +945,7 @@ function go(v, arg) {
 /* ================== ONBOARDING ================== */
 var OB = { name: '', avatar: '🦊', cls: '6e', target: 1 };
 function renderOnboarding() {
-  var h = '<div class="logo">Word <span>Up!</span></div><p style="text-align:center;margin:0 0 18px" class="muted">Collectionne les mots anglais du collège. Écoute-les, joue avec, fais-les évoluer.</p>';
+  var h = '<div class="logo">Word <span>Up!</span></div><div class="classic-brand-byline"><span>by</span><img src="assets/brot2you-app-logo.png" alt="BROT2YOU APP" width="85" height="63"></div><p style="text-align:center;margin:0 0 18px" class="muted">Collectionne les mots anglais du collège. Écoute-les, joue avec, fais-les évoluer.</p>';
   h += '<div class="stk" style="padding:18px">';
   h += '<h2 style="font-size:1.3em">Ton prénom ou pseudo</h2><input type="text" id="ob-name" maxlength="18" value="' + esc(OB.name) + '" placeholder="ex. Léa" style="width:100%;margin:8px 0 16px" autocomplete="off">';
   h += '<h2 style="font-size:1.3em">Ton avatar</h2><div class="pickers" style="margin:8px 0 16px">';
