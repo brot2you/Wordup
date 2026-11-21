@@ -34,3 +34,6 @@
 - Helper `ico()` dans app.js : si une image manque, l'emoji d'origine s'affiche.
 - Badges et compagnons verrouillés : icône grisée au lieu du cadenas.
 - Les emojis des mots du lexique restent inchangés.
+
+## V5.2 — Icônes de tous les thèmes
+- 96 nouvelles icônes de mondes (bonus du programme, packs BONUS, packs de la version originale) : les 123 thèmes ont désormais leur île illustrée.
