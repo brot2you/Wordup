@@ -88,3 +88,26 @@
 .logo .brand-byline>span{font:italic 700 12px/1 var(--body);color:#dfc9ff;text-transform:lowercase;letter-spacing:1.5px}
 .logo .brand-byline img{width:54px;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 1px 3px rgba(255,255,255,.25))}
 @media(max-width:560px){.logo .brand-byline{margin-top:3px;min-height:31px}.logo .brand-byline img{width:48px}.logo strong{font-size:24px}.logo-mark{width:43px;height:43px}}
+
+/* ================== V5 · SAY IT BETTER! (home section) ================== */
+.sib-title h2{color:#c6ff3d;text-shadow:0 0 18px #c6ff3d55}
+.sib-title:before,.sib-title:after{background:linear-gradient(90deg,transparent,#c6ff3d)}
+.sib-home{display:grid;grid-template-columns:minmax(260px,.9fr) 2fr;gap:18px;border:2px solid #c6ff3d;border-radius:24px;padding:20px;background:radial-gradient(circle at 0 0,#c6ff3d26,transparent 40%),radial-gradient(circle at 100% 100%,#ff4fd822,transparent 45%),linear-gradient(140deg,#232a3d,#16123a);box-shadow:0 6px 0 #0b0924,0 0 32px #c6ff3d2e}
+.sib-home-intro{display:flex;flex-direction:column;justify-content:center;gap:4px}
+.sib-kick{color:#c6ff3d}
+.sib-home-intro h3{font:800 clamp(34px,4vw,52px)/1 var(--title);margin:6px 0 0;text-shadow:0 4px 0 #2e0f5e}
+.sib-home-intro h3 em{font-style:normal;color:#c6ff3d;background:linear-gradient(transparent 60%,#ff4fd860 60%)}
+.sib-home-tag{font:800 20px var(--title);margin:6px 0 2px;color:#f2ffd6}
+.sib-home-tag s{color:#ffb3ec;text-decoration-color:#ff4fd8;text-decoration-thickness:3px}
+.sib-home-text{color:var(--muted);font-weight:700;margin:4px 0 14px}
+.sib-btn{display:inline-block;text-align:center;text-decoration:none;background:linear-gradient(#f4ffc4 0%,#c6ff3d 55%,#8fd400 100%);color:#162000;box-shadow:0 5px 0 #4f7a00,0 0 25px #c6ff3d55;align-self:flex-start}
+.sib-btn:hover{box-shadow:0 8px 0 #4f7a00,0 0 32px #c6ff3d88}
+.sib-home-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.sib-tile{position:relative;display:flex;flex-direction:column;gap:4px;min-height:132px;padding:14px 12px;border:2px solid #8fd40099;border-radius:18px;background:linear-gradient(155deg,#33420f,#1b1840);color:#fff;text-decoration:none;box-shadow:0 5px 0 #0b0924;transition:transform .2s,border-color .2s}
+.sib-tile:hover,.sib-tile:focus-visible{transform:translateY(-5px);border-color:#c6ff3d;outline:none}
+.sib-tile .sib-ic{font-size:32px}
+.sib-tile strong{font:800 18px/1.1 var(--title);color:#f0ffd1}
+.sib-tile small{color:#cfd6b8;font-weight:700;font-size:12.5px}
+.sib-new{position:absolute;top:9px;right:9px;background:#ff4fd8;color:#fff;font-size:11px;font-weight:900;letter-spacing:1px;padding:3px 8px;border-radius:99px}
+@media(max-width:1090px){.sib-home{grid-template-columns:1fr}.sib-home-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:740px){.sib-home{padding:15px}.sib-home-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.sib-tile{min-height:118px}.sib-btn{align-self:stretch}}

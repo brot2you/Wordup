@@ -26,3 +26,6 @@ This is a functional V4 fusion with two connected game rooms (not yet a single u
 
 ## V4.1 branding update
 The supplied BROT2YOU APP logo has been integrated as a small **by [logo]** credit directly below the WORDUP title in the main arcade header and below the original Word Up! onboarding title. No game logic, vocabulary, local saves or collections were changed. Include `assets/brot2you-app-logo.png` when publishing.
+
+## V5 · SAY IT BETTER!
+Nouvelle rubrique d'enrichissement lexical (accueil + salle de jeux) : Upgrade! (jauge d'intensité), L'échelle (34 échelles), Thésaurus (exemples et faux amis), Labo des mots, Atelier de composition, **Word Partners** (120 collocations) et **The Rewriting Room** (40 textes). Détails dans `CHANGELOG-V5.md`.
