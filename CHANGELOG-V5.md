@@ -28,3 +28,9 @@
 
 ## Fichiers modifiés
 `classic.html`, `classic-arcade.css`, `app.js`, `styles.css`, `README.md` (+ ce fichier). Les autres fichiers sont inchangés.
+
+## V5.1 — Icônes illustrées
+- 80 icônes WebP (256 px, fond transparent) dans `assets/icons/` : barre du haut, modes de jeu, SAY IT BETTER!, badges, compagnons, avatars, histoires, 27 mondes du programme.
+- Helper `ico()` dans app.js : si une image manque, l'emoji d'origine s'affiche.
+- Badges et compagnons verrouillés : icône grisée au lieu du cadenas.
+- Les emojis des mots du lexique restent inchangés.

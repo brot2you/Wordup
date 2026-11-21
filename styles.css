@@ -111,3 +111,24 @@
 .sib-new{position:absolute;top:9px;right:9px;background:#ff4fd8;color:#fff;font-size:11px;font-weight:900;letter-spacing:1px;padding:3px 8px;border-radius:99px}
 @media(max-width:1090px){.sib-home{grid-template-columns:1fr}.sib-home-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:740px){.sib-home{padding:15px}.sib-home-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.sib-tile{min-height:118px}.sib-btn{align-self:stretch}}
+
+/* V5.1 · Icônes illustrées (assets/icons) */
+.b2y-ico{display:inline-block;width:1.35em;height:1.35em;object-fit:contain;vertical-align:middle;-webkit-user-drag:none;user-select:none}
+.b2y-ico.inl{width:1.25em;height:1.25em;vertical-align:-.3em;margin-right:.1em}
+.b2y-ico.locked{filter:grayscale(1) brightness(.35) contrast(.9);opacity:.75}
+.stat-pill>span .b2y-ico{width:26px;height:26px}
+.avatar-pill .b2y-ico{width:38px;height:38px;border-radius:50%}
+.icon-btn .b2y-ico{width:28px;height:28px}
+.icon-btn{display:grid;place-items:center;padding:0}
+.mode-card .mode-icon{overflow:visible}
+.mode-card .mode-icon .b2y-ico{width:50px;height:50px;filter:drop-shadow(0 3px 0 #0b092480)}
+.sib-ic .b2y-ico{width:58px;height:58px}
+.head-ico .b2y-ico{width:58px;height:58px}
+.deck-btn span .b2y-ico{width:52px;height:52px}
+.featured-icon .b2y-ico{width:104px;height:104px}
+.quest-node .emoji .b2y-ico{width:96px;height:96px}
+.reward-card .emoji .b2y-ico{width:84px;height:84px}
+.badge-tile .emoji .b2y-ico{width:74px;height:74px}
+.story-ico .b2y-ico{width:72px;height:72px}
+.album-card span .b2y-ico{width:40px;height:40px}
+.tag .b2y-ico.inl{width:1.5em;height:1.5em;vertical-align:-.45em}
